@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import axios from 'axios';
 
-const app = () => {
+const App = () => {
   const [data, setData] = useState(null);
   const onClick = () => {
     axios
