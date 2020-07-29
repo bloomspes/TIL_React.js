@@ -1,20 +1,23 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const App = () => {
   const [data, setData] = useState(null);
-  const onClick = () => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => {
-        setData(response.data);
-      });
+  const onClick = async () => {
+    try {
+      const response = await axios.get(
+        'https://jsonplaceholder.typecode.com/todos/1',
+      );
+      setData(response.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
-    <Fragment>
-      <Fragment>
-        <button onClick={onClick}>load</button>
-      </Fragment>
+    <div>
+      <div>
+        <button onClick={onClick}>API Request</button>
+      </div>
       {data && (
         <textarea
           rows={7}
@@ -22,7 +25,7 @@ const App = () => {
           readOnly={true}
         />
       )}
-    </Fragment>
+    </div>
   );
 };
 
