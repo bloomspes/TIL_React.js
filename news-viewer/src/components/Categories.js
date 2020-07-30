@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const categories = [
   {
@@ -55,16 +55,33 @@ const Category = styled.div`
     color: #495057;
   }
 
+  ${(props) =>
+    props.active &&
+    css`
+      font-weight: 600;
+      border-bottom: 2px solid #22b8cf;
+      color: #22b8cf;
+      &:hover {
+        color: #f5a888;
+      }
+    `}
+
   & + & {
     margin-left: 1rem;
   }
 `;
-
-const Categories = () => {
+// Props로 전달 받은 onSelect를 Category 컴포넌트의 onClick으로 설정해 준다
+const Categories = ({ onSelect, category }) => {
   return (
     <CategoriesBlock>
       {categories.map((c) => (
-        <Category key={c.name}>{c.text}</Category>
+        <Category
+          key={c.name}
+          active={category === c.name}
+          onClick={() => onSelect(c.name)}
+        >
+          {c.text}
+        </Category>
       ))}
     </CategoriesBlock>
   );
