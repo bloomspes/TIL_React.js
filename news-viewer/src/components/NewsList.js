@@ -17,7 +17,7 @@ const NewsListBlock = styled.div`
   }
 `;
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
   const [articles, setArticles] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -25,8 +25,10 @@ const NewsList = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        // eslint-disable-next-line
+        const query = category === 'all' ? '' : `&category=${category}`;
         const response = await axios.get(
-          'http://newsapi.org/v2/top-headlines?country=kr&category=technology&apiKey=a4821e19d3224c7c93f026a6065721f7',
+          `http://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=a4821e19d3224c7c93f026a6065721f7`,
         );
         setArticles(response.data.articles);
       } catch (e) {
@@ -35,7 +37,7 @@ const NewsList = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [category]);
 
   // 대기 중
   if (loading) {

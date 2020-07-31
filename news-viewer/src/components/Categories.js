@@ -62,6 +62,7 @@ const Category = styled.div`
       border-bottom: 2px solid #22b8cf;
       color: #22b8cf;
       &:hover {
+        border-bottom: 2px solid #f5a888;
         color: #f5a888;
       }
     `}
