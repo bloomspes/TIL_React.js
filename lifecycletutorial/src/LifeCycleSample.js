@@ -1,11 +1,5 @@
 import React, { Component } from "react";
 
-// 1. getColor() 잘 동작하는지 다시 확인
-// 2. state => colorCodes and colorIndex
-// 3. 컬러코드는 props으로 받거나 컴포넌트 생성될 때 실행
-// 4. render() 내에서 style.color => this.colorCodes[this.colorIndex]
-// 그럼 되겠지...
-
 class LifeCycleSample extends Component {
   state = {
     number: 0,
@@ -27,19 +21,6 @@ class LifeCycleSample extends Component {
       return { color: nextProps.color };
     }
     return null;
-  }
-
-  getColor() {
-    let colorArray = [];
-    for (let i = 0; i < 6; i++) {
-      colorArray[i] = "#" + Math.floor(Math.random() * 16777215).toString(16);
-      console.log(colorArray[i]);
-      if (i > 6) {
-        i = 0;
-        continue;
-      }
-    }
-    return colorArray;
   }
 
   componentDidMount() {
@@ -74,7 +55,7 @@ class LifeCycleSample extends Component {
   render() {
     console.log("render");
     const style = {
-      color: this.props.colorArray,
+      color: this.props.color,
     };
 
     return (
@@ -82,7 +63,7 @@ class LifeCycleSample extends Component {
         <h1 style={style} ref={(ref) => (this.myRef = ref)}>
           {this.state.number}
         </h1>
-        <p>color: {this.state.colorArray}</p>
+        <p>color: {this.state.color}</p>
         <button onClick={this.handleClick}>더하기 ++;</button>
       </div>
     );
